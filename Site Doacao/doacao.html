@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oratorio</title>
+    <link rel="stylesheet" type="text/css" href="css/doacao.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    <script type="text/javascript"></script>
+</head>
+
+<body>
+
+    <header class="cabecalho"> 
+        <img class="cabecalho-imagem" src="imgs/thenext.png" alt="Logo Site">
+        <nav class="cabecalho-menu">
+            <a href="index.html" class="cabecalho-menu-item">Menu</a>
+            <a href="perfil.html" class="cabecalho-menu-item">Perfil</a>
+        </nav>
+        <a href="login.html"><button class="cabecalho-menu-login">Login</button></a>
+    </header>
+
+    <main class="conteudo-doacao">
+
+        <section class="carrossel-campanhas-apenas-titulo">
+            <h2 class="carrossel-campanhas-titulo">Campanhas</h2>
+        </section>
+    
+        <section class="carrossel-campanhas">
+            <div class="carrossel">
+                <div class="slide-campanha-1">
+                    <h3>Novembro Azul</h3>
+                    <p>É hora de se cuidar, homem com mais de 40 anos basta procurar o posto de saude mais próximo e realizar o exame.</p>
+                    <button>Saber mais...</button>
+                    <img src="imgs/novembro-azul.jpg" alt="Imagem Novembro Azul">
+                </div>
+                <div class="slide-campanha-2">
+                    <h3>Campanha do Agasalho 2023</h3>
+                    <p>Doar também é um gesto de amor e salva vidas, nesse inverno vamos contribuir com o próximo.</p>
+                    <button>Saber mais...</button>
+                    <img src="imgs/campanha-agasalho.png" alt="Imagem campanha agasalho">
+                </div>
+                <div class="slide-campanha-3">
+                    <h3>Rifa Benefiente</h3>
+                    <p>Estamos realizando uma rifa beneficiente em prol da ONG Vida Lata, com o intuito de arrecadar dinheiro para ração e mendicamentos de uso veterinário, venha e contribua com essa ação.</p>
+                    <button>Saber mais...</button>
+                    <img src="imgs/campanha-cachorro.png" alt="Imagem campanha cachorro">
+                </div>
+            </div>
+        </section>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.carrossel').slick({
+                dots: true,
+                infinite: true,
+                speed: 300,
+                slidesToShow: 1,
+                adaptiveHeight: true
+            });
+        });
+    </script>
+
+
+<section class="conteudo-secundario"> 
+    <h3 class="conteudo-secundario-titulo">Categorias</h3>
+</section>
+
+<section class="container">
+    <div class="card">
+        <img src="imgs/alimentos.png" alt="Imagem Alimentos">
+        <h4>Alimentos</h4>
+    </div>
+    <div class="card">
+        <img src="imgs/animais.png" alt="Imagem Animais">
+        <h4>Animais / Pets</h4>
+    </div>
+    <div class="card">
+        <img src="imgs/festas.png" alt="Imagem Eventos">
+        <h4>Eventos</h4>
+    </div>    
+</section>
+<section class="container">
+    <div class="card">
+        <img src="imgs/vestuario.png" alt="Imagem Vestuario">
+        <h4>Vestuário</h4>
+    </div>
+    <div class="card">
+        <img src="imgs/saude.png" alt="Imagem Saude">
+        <h4>Saúde / Tratamento</h4>
+    </div>
+    <div class="card">
+        <img src="imgs/projeto-social.png" alt="Imagem Projeto Social">
+        <h4>Projetos Sociais</h4>
+    </div>
+</section>
+
+
+        <section class="carrossel-ong-apenas-titulo">
+            <h2 class="carrossel-ong-titulo">ONG's</h2>
+        </section>
+        <section class="carrossel-ong">
+            <div class="carrossel">
+                <div class="slide-1">
+                    <h3>Oratório DOM BOSCO</h3>
+                    <p>Oratório Dom Bosco traz um ambiente de ampla acolhida, aberto a uma grande diversidade de adolescentes e jovens, sobretudo os mais afastados, com diversidade de propostas educativas e de evangelização; trabalho caracterizado pelo protagonismo juvenil e, por uma forte relação pessoal entre educadores e jovens, capaz de tornar-se uma presença missionária no mundo do jovem e na sociedade civil.</p>
+                    <button>Saber mais...</button>
+                    <img src="imgs/dom-bosco.png" alt="Imagem dom bosco">
+                </div>
+                <div class="slide-2">
+                    <h3>Instituto Vaga Lume</h3>
+                    <p>o Instituto Vaga Lume, tem como objetivo empoderar crianças das comunidades rurais da Amazônia a partir da leitura e da gestão de bibliotecas comunitárias.</p>
+                    <button>Saber mais...</button>
+                    <img src="imgs/vaga-lume.png" alt="Imagem vaga-lume">
+                </div>
+                <div class="slide-3">
+                    <h3>Amor De Bicho</h3>
+                    <p>A ONG Amor de Bicho, tem o foco no regaste, tratamento e encontrar um novo lar para os animais.</p>
+                    <button>Saber mais...</button>
+                    <img src="imgs/amor-de-bicho.png" alt="Imagem amor de bicho">
+                </div>
+                <div class="slide-4">
+                    <h3>Instituto Amor e Vida</h3>
+                    <p>O Instituto Amor e Vida foi fundado em 05/03/2007 e reconhecido como Utilidade Pública Municipal em 05 de Junho de 2009, com o objetivo de apoiar pessoas portadoras de câncer e seus familiares, empreendendo apoio humano, emocional, econômico e material. Contamos com sua ajuda para mantermos o nosso trabalho.</p>
+                    <button>Saber mais...</button>
+                    <img src="imgs/amor-e-vida.png" alt="Imagem amor e vida">
+                </div>
+            </div>
+        </section>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.carrossel').slick({
+                dots: true,
+                infinite: true,
+                speed: 300,
+                slidesToShow: 1,
+                adaptiveHeight: true
+            });
+        });
+    </script>
+
+<section class="conteudo-secundario"> 
+    <h3 class="conteudo-secundario-titulo">Destaques</h3>
+</section>
+
+<section class="container-2">
+    <div class="card-destaque">
+        <img src="imgs/cestabasica.png" alt="Imagem Cesta Basica">
+        <h4>Cesta Basica</h4>
+        <p>Ajude com a compra de Cestas Basicas</p>
+        <p class="card-descricao">Oratorio UNISAL</p>
+        <p class="card-descricao">Campinas - SP</p>
+        <button class="botao-card-destaque-1">Detalhes...</button>
+    </div>
+    <div class="card-destaque">
+        <img src="imgs/agasalhos.jpg" alt="Imagem Agasalho">
+        <h4>Agasalhos</h4>
+        <p>Ajude com a doação de Agasalhos e Roupas de Frio</p>
+        <p class="card-descricao">Oratorio UNISAL</p>
+        <p class="card-descricao">Campinas - SP</p>
+        <button class="botao-card-destaque-2">Detalhes...</button>
+    </div>
+    <div class="card-destaque">
+        <img src="imgs/roupasdebebe.png" alt="Imagem Roupas de Bebe">
+        <h4>Roupas de Bebê</h4>
+        <p>Ajude com a doação de Roupas de Bebê</p>
+        <p class="card-descricao">Oratorio UNISAL</p>
+        <p class="card-descricao">Campinas - SP</p>
+        <button class="botao-card-destaque-3">Detalhes...</button>
+    </div>    
+    <div class="card-destaque">
+        <img src="imgs/roupasdecama.png" alt="Imagem Roupas de Cama">
+        <h4>Roupas de Cama</h4>
+        <p>Ajude com a doação de Roupas de Cama</p>
+        <p class="card-descricao">Oratorio UNISAL</p>
+        <p class="card-descricao">Campinas - SP</p>
+        <button class="botao-card-destaque-4">Detalhes...</button>
+    </div>
+    <div class="card-destaque">
+        <img src="imgs/sapatos.jpg" alt="Imagem Sapatos">
+        <h4>Sapatos</h4>
+        <p>Ajude com a doação de Sapatos ou Tênis</p>
+        <p class="card-descricao">Oratorio UNISAL</p>
+        <p class="card-descricao">Campinas - SP</p>
+        <button class="botao-card-destaque-5">Detalhes...</button>
+    </div>
+</section>
+
+
+    </main>
+        
+    <script src="js/script.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>
