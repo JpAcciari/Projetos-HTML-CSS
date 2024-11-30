@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Anuncio</title>
+    <link rel="stylesheet" type="text/css" href="css/criarAnuncio.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    <script type="text/javascript"></script>
+</head>
+
+<body>
+    <header class="cabecalho"> 
+        <img class="cabecalho-imagem" src="imgs/thenext.png" alt="Logo Site">
+        <nav class="cabecalho-menu">
+            <a href="index.html" class="cabecalho-menu-item">Menu</a>
+            <a href="doacao.php" class="cabecalho-menu-item">Doação</a>
+            <a href="profile.php" class="cabecalho-menu-item">Perfil</a>
+        </nav>
+        
+        <div id="login-button-container">
+            <!-- O botão de login/logout será inserido aqui via JavaScript -->
+        </div>
+
+    </header>
+
+    <main class="conteudo">
+        <div class="container">
+            <form name="frmAnuncio" method="post" action="" enctype="multipart/form-data" class="form-anuncio">
+    
+                <label for="txtong" class="form-label">ONG:</label><br>
+                <input type="text" name="txtong" value="" class="form-input"><br><br>
+    
+                <label for="txtcontato" class="form-label">Contato:</label><br>
+                <input type="text" name="txtcontato" value="" class="form-input"><br><br>
+    
+                <label for="txtdescricao" class="form-label">Descrição:</label><br>
+                <input type="text" name="txtdescricao" value="" class="form-input"><br><br>
+    
+                <label for="txtimg" class="form-label">Imagem:</label><br>
+                <input type="file" name="img" class="form-input-img"><br><br>
+    
+                <input type="submit" value="Criar" class="form-button">
+    
+            </form>
+        </div>
+    </main>
+    
+
+    <footer class="rodape">
+        <div class="rodape-container">
+            <div class="rodape-coluna">
+                <h4>Sobre Nós</h4>
+                <p>Nós somos um grupo dedicado a transformar vidas através de doações. Acreditamos no poder da solidariedade e da generosidade.</p>
+            </div>
+            <div class="rodape-coluna">
+                <h4>Links Úteis</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="doacao.php">Doação</a></li>
+                    <li><a href="profile.php">Perfil</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                </ul>
+            </div>
+            <div class="rodape-coluna">
+                <h4>Contato</h4>
+                <p>Email: contato@doe.com</p>
+                <p>Telefone: (19) 1234-5678</p>
+            </div>
+            <div class="rodape-coluna">
+                <h4>Redes Sociais</h4>
+                <div class="rodape-icones">
+                    <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
+                    <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
+                    <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
+                    <a href="#"><ion-icon name="logo-linkedin"></ion-icon></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+    <script src="js/script.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</html>

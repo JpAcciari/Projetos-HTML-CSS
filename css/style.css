@@ -1,0 +1,539 @@
+@import url('https://fonts.googleapis.com/css2?family=Righteous&family=Sarala:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+body {
+    font-size: 100%;
+    background-image: radial-gradient(circle at 50% 50%, #ffe3a3 0, #f2d59d 50%, #e5c897 100%);
+}    
+
+.cabecalho {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px;
+    background-image: radial-gradient(circle at 45.08% 45.08%, #fbf0d0 0, #f7e7c3 25%, #f2deb5 50%, #eed5a8 75%, #eacb9b 100%);
+}
+
+.cabecalho-imagem {
+    height: 100px;
+   
+}
+
+.cabecalho-menu {
+    margin-right: -400px;
+}
+
+.cabecalho-menu a{
+    position: relative;
+    font-size: 1.1em;
+    color: #8B0000;
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 46px;
+    cursor: pointer;
+}
+
+.cabecalho-menu a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 4px;
+    background: #A52A2A;
+    border-radius: 5px;
+    transform-origin: center;
+    transform: scaleX(0);
+    transition: transform .3s;
+}
+
+.cabecalho-menu a:hover::after {
+    transform-origin: center;
+    transform: scaleX(1);
+}
+
+.cabecalho-menu-item {
+    font-family: 'Sarala', sans-serif;
+    color: #A52A2A;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.cabecalho-menu-login{
+    width: 120px;
+    height: 50px;
+    background: #8B0000;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.2em;
+    color: white;
+    font-weight: 600;
+    font-family: 'Sarala', sans-serif;
+    font-size: 20px;
+    box-shadow: 2px 2px 2px black; 
+}
+
+.cabecalho-menu-login:hover {
+    background: #B22222;
+}
+
+.conteudo {
+    margin-bottom: 48px;
+    border-top: 1.8px solid #A52A2A;
+}
+
+.conteudo-principal {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-left: -12%;
+}
+
+.conteudo-principal-escrito {
+    display: flex;
+    flex-direction: column;
+    gap: 46px;
+    margin-top: 3%;   
+}
+
+.conteudo-principal-escrito-titulo {
+    margin-left: 22%;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 1200;
+    font-size: 64px;
+    color: #8B0000;
+}
+
+.conteudo-principal-escrito-subtitulo {
+    margin-left: 22%;
+    font-family: 'Sarala', sans-serif;
+    font-weight: 400;
+    font-size: 28px;
+    color: #B22222;
+}
+
+.conteudo-principal-escrito-botao {
+    background-color: #8B0000;
+    width: 180px;
+    height: 60px;
+    border: none;
+    box-shadow: 2px 2px 2px black;
+    border-radius: 16px;
+    font-family: 'Sarala', sans-serif;
+    font-weight: 500;
+    font-size: 24px;
+    color: #FFFAFA;
+    margin-left: 22%;
+    cursor: pointer;
+}
+
+.conteudo-principal-escrito-botao:hover {
+    background-color: #B22222;
+}
+
+.conteudo-principal-imagem {
+    height: 460px;
+    margin-left: 10px;
+    margin-top: 3%;
+    max-width: 100%;
+    height: auto;
+    
+}
+
+.conteudo-importancia {
+    display: flex;
+    font-family: 'Sarala', sans-serif;
+    width: 80%;
+    font-size: 17px;
+    margin-left: 150px;
+    gap: 100px;
+    margin-top: 20px;
+}
+
+.p-1 {
+    background-image: radial-gradient(circle at 45.08% 45.08%, #fbf0d0 0, #f7e7c3 25%, #f2deb5 50%, #eed5a8 75%, #eacb9b 100%);
+    width: 4000px;
+    height: 420px;
+    border-radius: 10px;
+    outline: auto;
+    outline-style: solid;
+    outline-color: #73654B;
+    box-shadow: 20px 20px 20px -20px;
+    text-align: justify;
+    padding: 20px 40px 20px 40px;
+}
+
+.p-1:hover {
+    color: black;
+    transform: scale(1.08);
+    transition: all 0.5s ease;
+}
+
+.p-2{
+    background-image: radial-gradient(circle at 45.08% 45.08%, #fbf0d0 0, #f7e7c3 25%, #f2deb5 50%, #eed5a8 75%, #eacb9b 100%);
+    width: 4000px;
+    height: 420px;
+    border-radius: 10px;
+    outline: auto;
+    outline-style: solid;
+    outline-color: #73654B;
+    box-shadow: 20px 20px 20px -20px;
+    text-align: justify;
+    padding: 20px 40px 20px 40px;
+}
+
+.p-2:hover {
+    color: black;
+    transform: scale(1.08);
+    transition: all 0.5s ease;
+}
+
+.conteudo-secundario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 88px;
+}
+
+.conteudo-secundario-titulo {
+    border-top: 2px solid #8B0000;
+    padding-top: 16px;
+    font-family: 'Sarala', sans-serif;
+    font-weight: 600;
+    font-size: 32px;
+    color: #8B0000;
+    margin-bottom: 50px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    padding: 32px;
+    margin-top: 20px;
+}
+
+.card {
+    background-image: radial-gradient(circle at 45.08% 45.08%, #fbf0d0 0, #f7e7c3 25%, #f2deb5 50%, #eed5a8 75%, #eacb9b 100%);
+    width: 280px;
+    height: 260px;
+    margin: 76px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    outline: auto;
+    outline-style: solid;
+    outline-color: #73654B;
+    text-align: center;
+    padding: 5px;
+    box-shadow: 20px 20px 20px -20px;
+    margin-top: -34px;
+}    
+
+.card h4 {
+    padding: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    text-decoration: underline;
+}
+
+.card p {
+    padding: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.card:hover {
+    color: black;
+    transform: scale(1.16);
+    transition: all 0.5s ease-out;
+}
+
+.icons {
+    font-size: 46px;
+}
+
+.icon-coracao {
+    margin: 284px;
+}
+
+.icon-social {
+    margin: 90px;
+}
+
+.icon-saude {
+    margin: 282px;
+}
+
+.icon-financeiro {
+    margin: 94px;
+}
+
+.rodape {
+    background-image: radial-gradient(circle at 45.08% 45.08%, #fbf0d0 0, #f7e7c3 25%, #f2deb5 50%, #eed5a8 75%, #eacb9b 100%);
+    color: #8B0000;
+    padding: 15px 0;
+    text-align: center;
+    margin-top: 200px;
+    margin-bottom: -48px;
+    border-top: 1.8px solid #A52A2A;
+}
+
+.rodape-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.rodape-coluna {
+    flex: 1;
+    min-width: 220px;
+    margin: 20px;
+}
+
+.rodape-coluna h4 {
+    font-family: 'Sarala', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.rodape-coluna p, .rodape-coluna ul, .rodape-coluna li, .rodape-coluna a {
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    color: #8B0000;
+    text-decoration: none;
+    line-height: 1.8;
+    font-weight: 600;
+}
+
+.rodape-coluna ul {
+    list-style: none;
+    padding: 0;
+}
+
+.rodape-coluna li {
+    margin-bottom: 10px;
+}
+
+.rodape-icones {
+    font-size: 24px;
+}
+
+.rodape-icones a {
+    color: #8B0000;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+.rodape-icones a:hover {
+    color: white;
+}
+
+
+@media only screen and (max-width: 1536px) {
+    /* Estilos específicos para telas com largura máxima de 1200px */
+    .cabecalho-menu {
+        margin-right: -200px; /* Ajuste o espaçamento do menu */
+    }
+
+    .conteudo-importancia {
+        width: 90%; /* Reduza a largura do bloco de conteúdo */
+        margin-left: 5%; /* Centralize o bloco de conteúdo */
+        display: flex;
+        font-family: 'Sarala', sans-serif;
+        width: 90%;
+        font-size: 17px;
+        gap: 100px;
+        margin-top: 20px;
+    }
+
+    .container {
+        justify-content: center; /* Centralize os cartões */
+    }
+
+    .card {
+        margin: 20px; /* Ajuste a margem entre os cartões */
+    }
+
+    .card h4 {
+        padding: 10px;
+        font-family: 'Roboto', sans-serif;
+        font-size: 1rem;
+        display: flex;
+        justify-content: center;
+        text-decoration: underline;
+    }
+    
+    .card p {
+        padding: 10px;
+        font-family: 'Poppins', sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .icons {
+        font-size: 44px;
+    }
+    
+    .icon-coracao {
+        margin: 256px;
+    }
+    
+    .icon-social {
+        margin: 9px;
+    }
+    
+    .icon-saude {
+        margin: 252px;
+    }
+    
+    .icon-financeiro {
+        margin: 9px;
+    }
+}
+
+@media only screen and (max-width: 1440px) {
+    /* Estilos específicos para telas com largura máxima de 1200px */
+    .cabecalho-menu {
+        margin-right: -200px; /* Ajuste o espaçamento do menu */
+    }
+
+    .conteudo-importancia {
+        width: 90%; /* Reduza a largura do bloco de conteúdo */
+        margin-left: 5%; /* Centralize o bloco de conteúdo */
+        display: flex;
+        font-family: 'Sarala', sans-serif;
+        width: 90%;
+        font-size: 17px;
+        gap: 100px;
+        margin-top: 20px;
+    }
+
+    .container {
+        justify-content: center; /* Centralize os cartões */
+    }
+
+    .card {
+        margin: 20px; /* Ajuste a margem entre os cartões */
+    }
+
+    .card h4 {
+        padding: 10px;
+        font-family: 'Roboto', sans-serif;
+        font-size: 1rem;
+        display: flex;
+        justify-content: center;
+        text-decoration: underline;
+    }
+    
+    .card p {
+        padding: 10px;
+        font-family: 'Poppins', sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .icons {
+        font-size: 46px;
+    }
+    
+    .icon-coracao {
+        margin: 170px;
+    }
+    
+    .icon-social {
+        margin: 90px;
+    }
+    
+    .icon-saude {
+        margin: 172px;
+    }
+    
+    .icon-financeiro {
+        margin: 92px;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    /* Estilos específicos para telas com largura máxima de 1200px */
+    .cabecalho-menu {
+        margin-right: -200px; /* Ajuste o espaçamento do menu */
+    }
+
+    .conteudo-importancia {
+        width: 90%; /* Reduza a largura do bloco de conteúdo */
+        margin-left: 5%; /* Centralize o bloco de conteúdo */
+        display: flex;
+        font-family: 'Sarala', sans-serif;
+        width: 90%;
+        font-size: 17px;
+        gap: 100px;
+        margin-top: 20px;
+    }
+
+    .container {
+        justify-content: center; /* Centralize os cartões */
+        display: flex;
+        width: 120%;
+    }
+
+    .card {
+        margin: 20px; /* Ajuste a margem entre os cartões */
+    }
+
+    .card h4 {
+        padding: 10px;
+        font-family: 'Roboto', sans-serif;
+        font-size: 1rem;
+        display: flex;
+        justify-content: center;
+        text-decoration: underline;
+    }
+    
+    .card p {
+        padding: 4px;
+        font-family: 'Poppins', sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .icons {
+        font-size: 46px;
+    }
+    
+    .icon-coracao {
+        margin: 156px;
+    }
+    
+    .icon-social {
+        margin: 76px;
+    }
+    
+    .icon-saude {
+        margin: 156px;
+    }
+    
+    .icon-financeiro {
+        margin: 12px;
+    }
+}
