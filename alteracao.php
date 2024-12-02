@@ -18,13 +18,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $endereco = pg_escape_string($conexao, $_POST['txtendereco']);
     $user_nome_responsavel = pg_escape_string($conexao, $_POST['txtnomeresponsavel']);
     $user_cpf_responsavel = pg_escape_string($conexao, $_POST['txtcpfresponsavel']);
+    $user_telefone = pg_escape_string($conexao, $_POST['txttelefone']);  // Telefone
+    $user_descricao = pg_escape_string($conexao, $_POST['txtdescricao']);  // Descrição
 
     if (isset($_SESSION['user_cpf'])) {
         $query = "UPDATE doadores SET nome = $1, cpf = $2, email = $3, cep = $4, endereco = $5 WHERE email = $6";
         $params = [$nome, $doc, $email, $cep, $endereco, $_SESSION['user_email']];
     } else {
-        $query = "UPDATE ongs SET nome = $1, cnpj = $2, email = $3, cep = $4, endereco = $5, nome_responsavel = $6, cpf_responsavel = $7 WHERE email = $8";
-        $params = [$nome, $doc, $email, $cep, $endereco, $user_nome_responsavel, $user_cpf_responsavel, $_SESSION['user_email']];
+        $query = "UPDATE ongs SET nome = $1, cnpj = $2, email = $3, cep = $4, endereco = $5, nome_responsavel = $6, cpf_responsavel = $7, telefone = $8, descricao = $9 WHERE email = $10";
+        $params = [$nome, $doc, $email, $cep, $endereco, $user_nome_responsavel, $user_cpf_responsavel, $user_telefone, $user_descricao, $_SESSION['user_email']];
     }
 
     $result = pg_query_params($conexao, $query, $params);
@@ -40,6 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['user_cnpj'] = $doc;
             $_SESSION['user_nome_responsavel'] = $user_nome_responsavel;
             $_SESSION['user_cpf_responsavel'] = $user_cpf_responsavel;
+            $_SESSION['user_telefone'] = $user_telefone;  // Atualiza telefone
+            $_SESSION['user_descricao'] = $user_descricao;  // Atualiza descrição
         }
 
         echo "Informações atualizadas com sucesso!";

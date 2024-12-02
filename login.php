@@ -28,6 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['user_cnpj'] = $user['cnpj'];
             $_SESSION['user_nome_responsavel'] = $user['nome_responsavel'];
             $_SESSION['user_cpf_responsavel'] = $user['cpf_responsavel'];
+            $_SESSION['user_telefone'] = $user['telefone'];  // Adicionando telefone
+            $_SESSION['user_descricao'] = $user['descricao'];  // Adicionando descrição
         }
         $_SESSION['user_email'] = $user['email'];
         $_SESSION['user_senha'] = $user['senha'];
