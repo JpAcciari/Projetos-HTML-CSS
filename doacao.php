@@ -161,7 +161,9 @@ $result = pg_query($conexao, $query);
             <div class="slide-1">
                 <h3>IMENE</h3>
                 <p>Na Imene, acreditamos que a educação é a chave para a transformação social. Nosso compromisso é capacitar indivíduos e fortalecer comunidades, oferecendo oportunidades de aprendizado que criam pontes para um futuro mais promissor. Com cada aula ministrada e cada pessoa formada, reforçamos a crença de que juntos podemos construir um mundo melhor.</p>
-                <button>Saber mais...</button>
+                <a href="paginaOng.php?cnpj=12.345.678/0001-10">
+                    <button>Saber mais...</button>
+                </a>
                 <img src="imgs/imene.png" alt="Imagem IMENE">
             </div>
             <div class="slide-2">
