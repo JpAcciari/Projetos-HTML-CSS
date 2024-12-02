@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// Verifica o login
 if (!isset($_SESSION['user_email'])) {
     echo '<script>alert("Só será possível visualizar seus dados ao realizar o login.");</script>';
     exit;
