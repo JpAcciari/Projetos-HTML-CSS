@@ -3,7 +3,7 @@ session_start();
 
 // Verifica o login
 if (!isset($_SESSION['user_email'])) {
-    echo '<script>alert("Só sera possivel visualizar seus dados ao realizar o login.");</script>';
+    echo '<script>alert("Só será possível visualizar seus dados ao realizar o login.");</script>';
     exit;
 }
 
@@ -21,35 +21,13 @@ if (isset($_SESSION['user_cpf'])) {
     $user_doc = $_SESSION['user_cnpj'];
     $user_nome_responsavel = $_SESSION['user_nome_responsavel'];
     $user_cpf_responsavel = $_SESSION['user_cpf_responsavel'];
+    $user_telefone = $_SESSION['user_telefone']; // Atribuindo telefone da ONG
+    $user_descricao = $_SESSION['user_descricao']; // Atribuindo descrição da ONG
 }
-
 
 if (isset($_SESSION['user_cpf'])) {
     echo '
-
-    <div class="profile-form">
-
-    <form name="frmProfile" method="post" action="alteracao.php" class="form">
-        <label for="txtnome" class="form-label">Nome Completo:</label><br>
-        <input type="text" name="txtnome" value="' . $user_nome . '" class="form-input"><br><br>
-
-        <label for="txtdoc" class="form-label">CPF:</label><br>
-        <input type="text" name="txtdoc" value="' . $user_doc . '" class="form-input"><br><br>
-
-        <label for="txtemail" class="form-label">Email:</label><br>
-        <input type="text" name="txtemail" value="' . $user_email . '" class="form-input"><br><br>
-
-        <label for="txtcep" class="form-label">CEP:</label><br>
-        <input type="text" name="txtcep" value="' . $user_cep . '" class="form-input"><br><br>
-
-        <label for="txtendereco" class="form-label">Endereço:</label><br>
-        <input type="text" name="txtendereco" value="' . $user_endereco . '" class="form-input"><br><br>
-        
-        <input type="submit" value="Atualizar" class="form-button">
-    </form>
-    </div>
-
-    <style>
+<style>
     .profile-form {
         width: 80%;
         max-width: 600px;
@@ -126,67 +104,41 @@ if (isset($_SESSION['user_cpf'])) {
     }
 
     </style>
+    <div class="profile-form">
+
+    <form name="frmProfile" method="post" action="alteracao.php" class="form">
+        <label for="txtnome" class="form-label">Nome Completo:</label><br>
+        <input type="text" name="txtnome" value="' . $user_nome . '" class="form-input"><br><br>
+
+        <label for="txtdoc" class="form-label">CPF:</label><br>
+        <input type="text" name="txtdoc" value="' . $user_doc . '" class="form-input"><br><br>
+
+        <label for="txtemail" class="form-label">Email:</label><br>
+        <input type="text" name="txtemail" value="' . $user_email . '" class="form-input"><br><br>
+
+        <label for="txtcep" class="form-label">CEP:</label><br>
+        <input type="text" name="txtcep" value="' . $user_cep . '" class="form-input"><br><br>
+
+        <label for="txtendereco" class="form-label">Endereço:</label><br>
+        <input type="text" name="txtendereco" value="' . $user_endereco . '" class="form-input"><br><br>
+
+        <input type="submit" value="Atualizar" class="form-button">
+    </form>
+    </div>
     ';
 } else {
     echo '
-    
-    <div class="formulario-ong-profile">
-        <form name="frmProfile" method="post" action="alteracao.php" class="form">
-            <label for="txtnome" class="form-label">Nome ONG:</label><br>
-            <input type="text" name="txtnome" value="' . $user_nome . '" class="form-input"><br><br>
-
-            <label for="txtdoc" class="form-label">CNPJ:</label><br>
-            <input type="text" name="txtdoc" value="' . $user_doc . '" class="form-input"><br><br>
-
-            <label for="txtemail" class="form-label">Email:</label><br>
-            <input type="text" name="txtemail" value="' . $user_email . '" class="form-input"><br><br>
-
-            <label for="txtnomeresponsavel" class="form-label">Nome Responsável:</label><br>
-            <input type="text" name="txtnomeresponsavel" value="' . $user_nome_responsavel . '" class="form-input"><br><br>
-
-            <label for="txtcpfresponsavel" class="form-label">CPF Responsável:</label><br>
-            <input type="text" name="txtcpfresponsavel" value="' . $user_cpf_responsavel . '" class="form-input"><br><br>
-            
-        </form>
-
-
-        <form name="frmPerfil method="post" action="alteracao.php" class="form-perfil">
-
-            <label for="txttelefone" class="form-label">Telefone:</label><br>
-            <input type="text" name="txttelefone" value="' . $user_telefone . '" class="form-input"><br><br>
-
-            <label for="txtcep" class="form-label">CEP:</label><br>
-            <input type="text" name="txtcep" value="' . $user_cep . '" class="form-input"><br><br>
-
-            <label for="txtendereco" class="form-label">Endereço:</label><br>
-            <input type="text" name="txtendereco" value="' . $user_endereco . '" class="form-input"><br><br>
-
-            <label for="txtdescricao" class="form-label">Descrição:</label><br>
-            <input type="text" name="txtdescricao" value="' . $user_descricao . '" class="form-input"><br><br>
-            
-        </form>
-        <input type="submit" value="Atualizar" class="form-button">
-    </div>
-    
     <style>
         
     .formulario-ong-profile {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 20px;
     }
 
     .form {
         width: 100%;
-        height: 100%;
-        margin: 0 auto;
-        padding: 20px;
-        
-    }
-
-    .form-perfil {
-        width: 100%;
-        height: 100%;
-        margin: 0 auto;
         padding: 20px;
     }
     
@@ -211,9 +163,6 @@ if (isset($_SESSION['user_cpf'])) {
         border: none;
         border-radius: 4px;
         cursor: pointer;
-        margin-top: 480px;
-        margin-left: -122px;
-        float: right;
     }
     
     .form-button:hover {
@@ -268,7 +217,39 @@ if (isset($_SESSION['user_cpf'])) {
     }
 
     </style>
-    ';
+    <div class="formulario-ong-profile">
+        <form name="frmProfile" method="post" action="alteracao.php" class="form">
+            <label for="txtnome" class="form-label">Nome ONG:</label><br>
+            <input type="text" name="txtnome" value="' . $user_nome . '" class="form-input"><br><br>
+
+            <label for="txtdoc" class="form-label">CNPJ:</label><br>
+            <input type="text" name="txtdoc" value="' . $user_doc . '" class="form-input"><br><br>
+
+            <label for="txtemail" class="form-label">Email:</label><br>
+            <input type="text" name="txtemail" value="' . $user_email . '" class="form-input"><br><br>
+
+            <label for="txtnomeresponsavel" class="form-label">Nome Responsável:</label><br>
+            <input type="text" name="txtnomeresponsavel" value="' . $user_nome_responsavel . '" class="form-input"><br><br>
+
+            <label for="txtcpfresponsavel" class="form-label">CPF Responsável:</label><br>
+            <input type="text" name="txtcpfresponsavel" value="' . $user_cpf_responsavel . '" class="form-input"><br><br>
+
+            <label for="txttelefone" class="form-label">Telefone:</label><br>
+            <input type="text" name="txttelefone" value="' . $user_telefone . '" class="form-input"><br><br>
+
+            <label for="txtcep" class="form-label">CEP:</label><br>
+            <input type="text" name="txtcep" value="' . $user_cep . '" class="form-input"><br><br>
+
+            <label for="txtendereco" class="form-label">Endereço:</label><br>
+            <input type="text" name="txtendereco" value="' . $user_endereco . '" class="form-input"><br><br>
+
+            <label for="txtdescricao" class="form-label">Descrição:</label><br>
+            <input type="text" name="txtdescricao" value="' . $user_descricao . '" class="form-input"><br><br>
+
+            <input type="submit" value="Atualizar" class="form-button">
+        </form>
+    </div>
     
+    ';
 }
 ?>
