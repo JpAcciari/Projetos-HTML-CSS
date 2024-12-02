@@ -1,33 +1,35 @@
 <?php
 session_start();
 
-// Verifica o login
 if (!isset($_SESSION['user_email'])) {
     header('Location: erroPerfil.html');
     exit;
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $conexao = mysqli_connect('127.0.0.1', 'root', '', 'doacao', 3306);
+    $conexao = pg_connect("host=kesavan.db.elephantsql.com dbname=aekljadg user=aekljadg password=kKEMZKgkqDLwN98jK2HX8-H9aIgW2JVs port=5432");
     if (!$conexao) 
-        die("Falha na conexão: " . mysqli_connect_error());
+        die("Falha na conexão: " . pg_last_error());
 
-    $nome = mysqli_real_escape_string($conexao, $_POST['txtnome']);
-    $doc = mysqli_real_escape_string($conexao, $_POST['txtdoc']);
-    $email = mysqli_real_escape_string($conexao, $_POST['txtemail']);
-    $cep = mysqli_real_escape_string($conexao, $_POST['txtcep']);
-    $endereco = mysqli_real_escape_string($conexao, $_POST['txtendereco']);
-    $user_nome_responsavel = mysqli_real_escape_string($conexao, $_POST['txtnomeresponsavel']);
-    $user_cpf_responsavel = mysqli_real_escape_string($conexao, $_POST['txtcpfresponsavel']);
+    $nome = pg_escape_string($conexao, $_POST['txtnome']);
+    $doc = pg_escape_string($conexao, $_POST['txtdoc']);
+    $email = pg_escape_string($conexao, $_POST['txtemail']);
+    $cep = pg_escape_string($conexao, $_POST['txtcep']);
+    $endereco = pg_escape_string($conexao, $_POST['txtendereco']);
+    $user_nome_responsavel = pg_escape_string($conexao, $_POST['txtnomeresponsavel']);
+    $user_cpf_responsavel = pg_escape_string($conexao, $_POST['txtcpfresponsavel']);
 
     if (isset($_SESSION['user_cpf'])) {
-        $query = "UPDATE doadores SET nome='$nome', cpf='$doc', email='$email', cep='$cep', endereco='$endereco' WHERE email='{$_SESSION['user_email']}'";
+        $query = "UPDATE doadores SET nome = $1, cpf = $2, email = $3, cep = $4, endereco = $5 WHERE email = $6";
+        $params = [$nome, $doc, $email, $cep, $endereco, $_SESSION['user_email']];
     } else {
-        $query = "UPDATE ongs SET nome='$nome', cnpj='$doc', email='$email', cep='$cep', endereco='$endereco', nome_responsavel='$user_nome_responsavel', cpf_responsavel='$user_cpf_responsavel' WHERE email='{$_SESSION['user_email']}'";
+        $query = "UPDATE ongs SET nome = $1, cnpj = $2, email = $3, cep = $4, endereco = $5, nome_responsavel = $6, cpf_responsavel = $7 WHERE email = $8";
+        $params = [$nome, $doc, $email, $cep, $endereco, $user_nome_responsavel, $user_cpf_responsavel, $_SESSION['user_email']];
     }
 
-    if (mysqli_query($conexao, $query)) {
-        // Atualiza os dados na sessão
+    $result = pg_query_params($conexao, $query, $params);
+
+    if ($result) {
         $_SESSION['user_nome'] = $nome;
         $_SESSION['user_email'] = $email;
         $_SESSION['user_cep'] = $cep;
@@ -42,13 +44,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         echo "Informações atualizadas com sucesso!";
     } else {
-        echo "Erro ao atualizar informações: " . mysqli_error($conexao);
+        echo "Erro ao atualizar informações: " . pg_last_error($conexao);
     }
 
-    mysqli_close($conexao);
+    pg_close($conexao);
     header('Location: profile.php');
     exit;
 }
 ?>
-
-

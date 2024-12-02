@@ -1,14 +1,12 @@
 <?php
-session_start(); // Inicia a sessão
+session_start();
 
-// Conectar ao banco de dados
-$conexao = mysqli_connect('127.0.0.1', 'root', '', 'doacao', 3306);
+$conexao = pg_connect("host=kesavan.db.elephantsql.com dbname=aekljadg user=aekljadg password=kKEMZKgkqDLwN98jK2HX8-H9aIgW2JVs port=5432");
 if (!$conexao) {
-    die("Falha na conexão: " . mysqli_connect_error());
+    die("Falha na conexão: " . pg_last_error());
 }
 
-// Consulta para obter os anúncios
-$stmt = $conexao->prepare("
+$query = "
 SELECT 
   a.id_anuncio AS id_anuncio,
   a.nome AS nome,
@@ -17,9 +15,8 @@ SELECT
   o.nome AS ong_nome,
   o.cnpj AS ong_cnpj
 FROM anuncios a, ongs o
-WHERE a.ong_cnpj = o.cnpj");
-$stmt->execute();
-$result = $stmt->get_result();
+WHERE a.ong_cnpj = o.cnpj";
+$result = pg_query($conexao, $query);
 ?>
 
 <!DOCTYPE html>
@@ -92,7 +89,6 @@ $result = $stmt->get_result();
             <a href="profile.php"cabecalho-menu-item">Perfil</a>
         </nav>
         <div id="login-button-container">
-            <!-- O botão de login/logout será inserido aqui via JavaScript -->
         </div>
     </header>
 
@@ -194,85 +190,37 @@ $result = $stmt->get_result();
     </section>
 
     <section class="container-2">
-        <?php while ($anuncio = $result->fetch_assoc()): ?>
+        <?php while ($anuncio = pg_fetch_assoc($result)): ?>
             <div class="card-destaque">
-                <img src="<?php echo htmlspecialchars($anuncio['imagem'], ENT_QUOTES, 'UTF-8'); ?>" alt="Imagem <?php echo htmlspecialchars($anuncio['nome'], ENT_QUOTES, 'UTF-8'); ?>">
-                <h4><?php echo htmlspecialchars($anuncio['nome'], ENT_QUOTES, 'UTF-8'); ?></h4>
-                <p><?php echo htmlspecialchars($anuncio['descricao'], ENT_QUOTES, 'UTF-8'); ?></p>
-                <a href="paginaOng.php?cnpj=<?php echo htmlspecialchars($anuncio['ong_cnpj'], ENT_QUOTES, 'UTF-8'); ?>" class="card-descricao"><?php echo htmlspecialchars($anuncio['ong_nome'], ENT_QUOTES, 'UTF-8'); ?></a>
-                <button onclick="location.href='paginaAnuncio.php?id_anuncio=<?php echo htmlspecialchars($anuncio['id_anuncio'], ENT_QUOTES, 'UTF-8'); ?>'">Detalhes...</button>
+                <img src="data:image/jpeg;base64,<?= base64_encode($anuncio['imagem']) ?>" alt="Imagem anúncio">
+                <div class="card-destaque-informacao">
+                    <h4><?= $anuncio['nome'] ?></h4>
+                    <p><?= $anuncio['descricao'] ?></p>
+                    <button>Saber mais...</button>
+                </div>
             </div>
         <?php endwhile; ?>
     </section>
-</main>
 
-<footer class="rodape">
-    <div class="rodape-container">
-        <div class="rodape-coluna">
-            <h4>Sobre Nós</h4>
-            <p>Nós somos um grupo dedicado a transformar vidas através de doações. Acreditamos no poder da solidariedade e da generosidade.</p>
-        </div>
-        <div class="rodape-coluna">
-            <h4>Links Úteis</h4>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="doacao.html">Doação</a></li>
-                <li><a href="profile.php">Perfil</a></li>
-                <li><a href="contato.html">Contato</a></li>
-            </ul>
-        </div>
-        <div class="rodape-coluna">
-            <h4>Contato</h4>
-            <p>Email: contato@doe.com</p>
-            <p>Telefone: (19) 1234-5678</p>
-        </div>
-        <div class="rodape-coluna">
-            <h4>Redes Sociais</h4>
-            <div class="rodape-icones">
-                <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
-                <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
-                <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
-                <a href="#"><ion-icon name="logo-linkedin"></ion-icon></a>
-            </div>
+</main>
+<footer>
+    <div class="rodape">
+        <div class="informacoes">
+            <p>Desenvolvido por Tiago, 2024</p>
         </div>
     </div>
-</footer> 
-
+</footer>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script>
     $(document).ready(function(){
         $('.carrossel').slick({
-            dots: true,
-            infinite: true,
-            speed: 300,
-            slidesToShow: 1,
-            adaptiveHeight: true
-        });
-
-        // Verifica o status de login
-        $.ajax({
-            url: 'check_login.php',
-            type: 'GET',
-            dataType: 'json',
-            success: function(response) {
-                var loginButtonContainer = $('#login-button-container');
-                if (response.logged_in) {
-                    loginButtonContainer.html('<div class="botao-login-anuncio"> <a href="logout.php"><button class="cabecalho-menu-login">Sair</button></a> <a href="criarAnuncio.html"><button class="cabecalho-menu-anuncio"><i class="fas fa-plus"></i></button></a> </div>');
-                } else {
-                    loginButtonContainer.html('<a href="login.html"><button class="cabecalho-menu-login">Login</button></a>');
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error('Erro ao verificar o status de login:', error);
-            }
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 2000,
         });
     });
 </script>
-
-<script src="js/script.js"></script>
-<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
 </body>
 </html>
