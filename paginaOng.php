@@ -180,7 +180,7 @@ $(document).ready(function(){
         success: function(response) {
             var loginButtonContainer = $('#login-button-container');
             if (response.logged_in) {
-                loginButtonContainer.html('<div class="botao-login-anuncio"> <a href="logout.php"><button class="cabecalho-menu-login">Sair</button></a> <a href="criarAnuncio.html"><button class="cabecalho-menu-anuncio"><i class="fas fa-plus"></i></button></a> </div>');
+                loginButtonContainer.html('<div class="botao-login-anuncio"> <a href="logout.php"><button class="cabecalho-menu-login">Sair</button></a> <a href="criarAnuncio.php"><button class="cabecalho-menu-anuncio"><i class="fas fa-plus"></i></button></a> </div>');
             } else {
                 loginButtonContainer.html('<a href="login.html"><button class="cabecalho-menu-login">Login</button></a>');
             }

@@ -258,7 +258,7 @@ $result = pg_query($conexao, $query);
                 
                 if (response.is_ong) {
                     // Adiciona o botão de criar anúncio se for ONG
-                    buttons += '<a href="criarAnuncio.html"><button class="cabecalho-menu-anuncio"><i class="fas fa-plus"></i></button></a>';
+                    buttons += '<a href="criarAnuncio.php"><button class="cabecalho-menu-anuncio"><i class="fas fa-plus"></i></button></a>';
                 }
                 
                 loginButtonContainer.html(`<div class="botao-login-anuncio">${buttons}</div>`);
