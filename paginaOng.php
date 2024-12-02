@@ -1,3 +1,46 @@
+<?php 
+session_start();
+
+// Conectar ao banco de dados
+$conexao = pg_connect("host=kesavan.db.elephantsql.com dbname=aekljadg user=aekljadg password=kKEMZKgkqDLwN98jK2HX8-H9aIgW2JVs port=5432");
+if (!$conexao) {
+    die("Falha na conexão: " . pg_last_error());
+}
+
+// Verificar se o CNPJ foi passado na URL
+if (isset($_GET['cnpj'])) {
+    $cnpj_ong = $_GET['cnpj'];  // Pega o CNPJ da URL
+} else {
+    die("CNPJ da ONG não informado.");
+}
+
+// Puxar os dados da ONG
+$query_ong = "SELECT * FROM ongs WHERE cnpj = $1";
+$result_ong = pg_query_params($conexao, $query_ong, [$cnpj_ong]);
+
+if (pg_num_rows($result_ong) > 0) {
+    $ong = pg_fetch_assoc($result_ong);
+    $nome_ong = $ong['nome'];
+    $descricao_ong = $ong['descricao'];
+} else {
+    $nome_ong = "Nome da ONG não encontrado";
+    $descricao_ong = "Descrição não encontrada";
+}
+
+// Puxar os anúncios da ONG
+$query_anuncios = "SELECT * FROM anuncios WHERE ong_cnpj = $1";
+$result_anuncios = pg_query_params($conexao, $query_anuncios, [$cnpj_ong]);
+$anuncios = [];
+while ($anuncio = pg_fetch_assoc($result_anuncios)) {
+    $anuncios[] = $anuncio;
+}
+
+// Fechar a conexão com o banco de dados
+pg_free_result($result_ong);
+pg_free_result($result_anuncios);
+pg_close($conexao);
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -74,7 +117,6 @@
             color: #8B0000;
         }
     </style>
-
 </head>
 <body>
     
@@ -89,7 +131,6 @@
         <div id="login-button-container">
             <!-- O botão de login/logout será inserido aqui via JavaScript -->
         </div>
-
     </header>
 
     <main class="conteudo">
@@ -97,7 +138,7 @@
         <div class="bio-section">
             <div class="bio-header">Sobre a ONG</div>
             <div class="bio-content" id="bio-content">
-                <p></p>
+                <p><?php echo $nome_ong; ?> - <?php echo $descricao_ong; ?></p>
             </div>
         </div>
 
@@ -105,38 +146,19 @@
         <div class="donation-section">
             <div class="donation-header">Anúncios de Doações</div>
 
+            <?php foreach ($anuncios as $anuncio): ?>
+                <div class="donation-post">
+                    <div class="post-title"><?php echo $anuncio['nome']; ?></div>
+                    <div class="post-content">
+                        <?php echo $anuncio['descricao']; ?>
+                        <a href="paginaAnuncio.php?id_anuncio=<?php echo $anuncio['id_anuncio']; ?>">Saiba mais...</a>
+                    </div>
+                </div>
+            <?php endforeach; ?>
 
-            <div class="donation-post">
-                <div class="post-title">Doação de Cestas Básicas</div>
-                <div class="post-content">
-                    Ajude famílias carentes doando cestas básicas. Sua contribuição faz a diferença! 
-                    <strong>Meta:</strong> 10 cestas básicas.
-                    <a href="paginaAnuncio.php">Saiba mais...</a>
-                </div>
-            </div>
-            
-            <div class="donation-post">
-                <div class="post-title">Campanha de Cobertores para o Inverno</div>
-                <div class="post-content">
-                    Estamos arrecadando cobertores para ajudar pessoas em situação de rua a enfrentarem o frio deste inverno. 
-                    <strong>Meta:</strong> 20 cobertores.
-                    <a href="paginaAnuncio.php">Saiba mais...</a>
-                </div>
-            </div>
-
-            
-            <div class="donation-post">
-                <div class="post-title">Campanha de Livros Infantis</div>
-                <div class="post-content">
-                    Doe livros infantis e ajude a incentivar a leitura entre crianças de comunidades carentes. 
-                    <strong>Meta:</strong> 25 livros.
-                    <a href="paginaAnuncio.php">Saiba mais...</a>
-                </div>
-            </div>
         </div>
 
     </main>
-
 
     <footer class="rodape">
         <div class="rodape-container">
@@ -170,9 +192,10 @@
         </div>
     </footer>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function(){
+    // Verifica o status de login
     $.ajax({
         url: 'check_login.php',
         type: 'GET',
@@ -180,7 +203,7 @@ $(document).ready(function(){
         success: function(response) {
             var loginButtonContainer = $('#login-button-container');
             if (response.logged_in) {
-                loginButtonContainer.html('<div class="botao-login-anuncio"> <a href="logout.php"><button class="cabecalho-menu-login">Sair</button></a> <a href="criarAnuncio.php"><button class="cabecalho-menu-anuncio"><i class="fas fa-plus"></i></button></a> </div>');
+                loginButtonContainer.html('<div class="botao-login-anuncio"> <a href="logout.php"><button class="cabecalho-menu-login">Sair</button></a> <a href="criarAnuncio.html"><button class="cabecalho-menu-anuncio"><i class="fas fa-plus"></i></button></a> </div>');
             } else {
                 loginButtonContainer.html('<a href="login.html"><button class="cabecalho-menu-login">Login</button></a>');
             }
