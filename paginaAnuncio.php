@@ -1,7 +1,10 @@
 <?php
 session_start();
-mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-$conexao = new mysqli('127.0.0.1', 'root', '', 'doacao', 3306);
+$conexao = pg_connect("host=kesavan.db.elephantsql.com dbname=aekljadg user=aekljadg password=kKEMZKgkqDLwN98jK2HX8-H9aIgW2JVs port=5432");
+
+if (!$conexao) {
+    die("Erro ao conectar com o banco de dados.");
+}
 
 if (isset($_GET['id_anuncio'])) {
     $id_anuncio = intval($_GET['id_anuncio']);
@@ -9,7 +12,7 @@ if (isset($_GET['id_anuncio'])) {
     die("ID do anúncio não fornecido.");
 }
 
-$stmt = $conexao->prepare("
+$query = "
 SELECT 
   o.cnpj AS cnpj_ong,
   o.nome AS nome_ong,
@@ -21,30 +24,28 @@ SELECT
   a.imagem
 FROM anuncios a
 INNER JOIN ongs o ON a.ong_cnpj = o.cnpj
-WHERE a.id_anuncio = ?
-");
-$stmt->bind_param("i", $id_anuncio);
-$stmt->execute();
-$result = $stmt->get_result();
+WHERE a.id_anuncio = $1
+";
+$result = pg_query_params($conexao, $query, array($id_anuncio));
 
-if ($result->num_rows > 0) {
-    $anuncio = $result->fetch_assoc();
+if (pg_num_rows($result) > 0) {
+    $anuncio = pg_fetch_assoc($result);
     $cnpj_ong = $anuncio['cnpj_ong'];
 } else {
     die("Anúncio não encontrado.");
 }
 
-$stmt = $conexao->prepare("
+$query_outros = "
 SELECT 
   id_anuncio,
   nome AS nome_anuncio,
   imagem
 FROM anuncios
-WHERE ong_cnpj = ? AND id_anuncio != ?
-");
-$stmt->bind_param("si", $cnpj_ong, $id_anuncio);
-$stmt->execute();
-$outros_anuncios = $stmt->get_result();
+WHERE ong_cnpj = $1 AND id_anuncio != $2
+";
+$result_outros = pg_query_params($conexao, $query_outros, array($cnpj_ong, $id_anuncio));
+
+$outros_anuncios_disponiveis = pg_num_rows($result_outros) > 0;
 ?>
 
 <!DOCTYPE html>
@@ -62,7 +63,7 @@ $outros_anuncios = $stmt->get_result();
             display: flex;
             justify-content: center;
             margin-top: 20px;
-        }        
+        }
 
         .anuncio-destaque {
             display: flex;
@@ -136,7 +137,7 @@ $outros_anuncios = $stmt->get_result();
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-top: 10px; 
+            margin-top: 10px;
         }
 
         .outros-anuncios h2 {
@@ -212,14 +213,14 @@ $outros_anuncios = $stmt->get_result();
     </style>
 </head>
 <body>
-    <header class="cabecalho"> 
+    <header class="cabecalho">
         <img class="cabecalho-imagem" src="imgs/thenext.png" alt="Logo Site">
         <nav class="cabecalho-menu">
             <a href="index.html" class="cabecalho-menu-item">Menu</a>
             <a href="doacao.php" class="cabecalho-menu-item">Doação</a>
             <a href="profile.php" class="cabecalho-menu-item">Perfil</a>
         </nav>
-        
+
         <div id="login-button-container"></div>
     </header>
 
@@ -229,11 +230,11 @@ $outros_anuncios = $stmt->get_result();
             <div class="anuncio-detalhes">
                 <div class="anuncio-destaque-inicio">
                     <img class="anuncio-destaque-imagem" src="<?php echo htmlspecialchars($anuncio['imagem'], ENT_QUOTES, 'UTF-8'); ?>" alt="Imagem do anúncio">
-                </div>    
+                </div>
                 <div class="anuncio-destaque-lateral">
                     <p class="anuncio-descricao">
                         <?php echo htmlspecialchars($anuncio['descricao_anuncio'], ENT_QUOTES, 'UTF-8'); ?>
-                    </p>                
+                    </p>
                     <p class="anuncio-ong">
                         <strong>ONG:</strong> <?php echo htmlspecialchars($anuncio['nome_ong'], ENT_QUOTES, 'UTF-8'); ?>
                     </p>
@@ -246,20 +247,22 @@ $outros_anuncios = $stmt->get_result();
             </div>
         </section>
 
+        <?php if ($outros_anuncios_disponiveis): ?>
         <section class="outros-anuncios">
             <h2>Outras Doações Disponíveis</h2>
             <div class="anuncios-galeria">
-                <?php while ($outro_anuncio = $outros_anuncios->fetch_assoc()): ?>
+                <?php while ($outro_anuncio = pg_fetch_assoc($result_outros)): ?>
                     <img class="anuncio-miniatura" src="<?php echo $outro_anuncio['imagem']; ?>" alt="Imagem do Item">
                     <h3 class="anuncio-titulo-pequeno"><?php echo $outro_anuncio['nome_anuncio']; ?></h3>
-                    <button class="anuncio-botao-pequeno" onclick="location.href='paginaAnuncio.php?id_anuncio=<?php echo $outro_anuncio['id_anuncio']; ?>'">Detalhes...</button>
+                    <button class="anuncio-botao-pequeno" onclick="location.href='paginaAnuncio.php?id_anuncio=<?php echo $outro_anuncio['id_anuncio']; ?>'">Ver Detalhes</button>
                 <?php endwhile; ?>
             </div>
         </section>
+        <?php endif; ?>
     </main>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    <script src="js/anuncio.js"></script>
+    <footer class="rodape">
+        <p>&copy; 2024 ONG Doações - Todos os direitos reservados.</p>
+    </footer>
 </body>
 </html>
