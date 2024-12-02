@@ -262,7 +262,35 @@ $outros_anuncios_disponiveis = pg_num_rows($result_outros) > 0;
     </main>
 
     <footer class="rodape">
-        <p>&copy; 2024 ONG Doações - Todos os direitos reservados.</p>
-    </footer>
+            <div class="rodape-container">
+                <div class="rodape-coluna">
+                    <h4>Sobre Nós</h4>
+                    <p>Nós somos um grupo dedicado a transformar vidas através de doações. Acreditamos no poder da solidariedade e da generosidade.</p>
+                </div>
+                <div class="rodape-coluna">
+                    <h4>Links Úteis</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="doacao.php">Doação</a></li>
+                        <li><a href="profile.php">Perfil</a></li>
+                        <li><a href="contato.html">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="rodape-coluna">
+                    <h4>Contato</h4>
+                    <p>Email: contato@doe.com</p>
+                    <p>Telefone: (19) 1234-5678</p>
+                </div>
+                <div class="rodape-coluna">
+                    <h4>Redes Sociais</h4>
+                    <div class="rodape-icones">
+                        <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
+                        <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
+                        <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
+                        <a href="#"><ion-icon name="logo-linkedin"></ion-icon></a>
+                    </div>
+                </div>
+            </div>
+        </footer>  
 </body>
 </html>
