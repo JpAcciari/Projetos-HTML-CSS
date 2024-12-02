@@ -236,33 +236,42 @@ $result = pg_query($conexao, $query);
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script>
-    $(document).ready(function(){
-        $('.carrossel').slick({
-            dots: true,
-            infinite: true,
-            speed: 300,
-            slidesToShow: 1,
-            adaptiveHeight: true
-        });
-
-        // Verifica o status de login
-        $.ajax({
-            url: 'check_login.php',
-            type: 'GET',
-            dataType: 'json',
-            success: function(response) {
-                var loginButtonContainer = $('#login-button-container');
-                if (response.logged_in) {
-                    loginButtonContainer.html('<div class="botao-login-anuncio"> <a href="logout.php"><button class="cabecalho-menu-login">Sair</button></a> <a href="criarAnuncio.html"><button class="cabecalho-menu-anuncio"><i class="fas fa-plus"></i></button></a> </div>');
-                } else {
-                    loginButtonContainer.html('<a href="login.html"><button class="cabecalho-menu-login">Login</button></a>');
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error('Erro ao verificar o status de login:', error);
-            }
-        });
+    $(document).ready(function() {
+    $('.carrossel').slick({
+        dots: true,
+        infinite: true,
+        speed: 300,
+        slidesToShow: 1,
+        adaptiveHeight: true
     });
+
+    // Verifica o status de login
+    $.ajax({
+        url: 'check_login.php',
+        type: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            var loginButtonContainer = $('#login-button-container');
+
+            if (response.logged_in) {
+                let buttons = '<a href="logout.php"><button class="cabecalho-menu-login">Sair</button></a>';
+                
+                if (response.is_ong) {
+                    // Adiciona o botão de criar anúncio se for ONG
+                    buttons += '<a href="criarAnuncio.html"><button class="cabecalho-menu-anuncio"><i class="fas fa-plus"></i></button></a>';
+                }
+                
+                loginButtonContainer.html(`<div class="botao-login-anuncio">${buttons}</div>`);
+            } else {
+                loginButtonContainer.html('<a href="login.html"><button class="cabecalho-menu-login">Login</button></a>');
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('Erro ao verificar o status de login:', error);
+        }
+    });
+});
+
 </script>
 </body>
 </html>
