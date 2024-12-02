@@ -159,10 +159,10 @@ $result = pg_query($conexao, $query);
     <section class="carrossel-ong">
         <div class="carrossel">
             <div class="slide-1">
-                <h3>Amigos da Paz</h3>
-                <p>Amigos da Paz traz um ambiente de ampla acolhida, aberto a uma grande diversidade de adolescentes e jovens, sobretudo os mais afastados, com diversidade de propostas educativas e de evangelização; trabalho caracterizado pelo protagonismo juvenil e, por uma forte relação pessoal entre educadores e jovens, capaz de tornar-se uma presença missionária no mundo do jovem e na sociedade civil.</p>
+                <h3>IMENE</h3>
+                <p>Na Imene, acreditamos que a educação é a chave para a transformação social. Nosso compromisso é capacitar indivíduos e fortalecer comunidades, oferecendo oportunidades de aprendizado que criam pontes para um futuro mais promissor. Com cada aula ministrada e cada pessoa formada, reforçamos a crença de que juntos podemos construir um mundo melhor.</p>
                 <button>Saber mais...</button>
-                <img src="imgs/amigosdapaz.jpg" alt="Imagem Amigos da Paz">
+                <img src="imgs/imene.png" alt="Imagem IMENE">
             </div>
             <div class="slide-2">
                 <h3>Instituto Vaga Lume</h3>
@@ -192,21 +192,44 @@ $result = pg_query($conexao, $query);
     <section class="container-2">
         <?php while ($anuncio = pg_fetch_assoc($result)): ?>
             <div class="card-destaque">
-                <img src="data:image/jpeg;base64,<?= base64_encode($anuncio['imagem']) ?>" alt="Imagem anúncio">
-                <div class="card-destaque-informacao">
-                    <h4><?= $anuncio['nome'] ?></h4>
-                    <p><?= $anuncio['descricao'] ?></p>
-                    <button>Saber mais...</button>
-                </div>
+                <img src="<?php echo htmlspecialchars($anuncio['imagem'], ENT_QUOTES, 'UTF-8'); ?>" alt="Imagem <?php echo htmlspecialchars($anuncio['nome'], ENT_QUOTES, 'UTF-8'); ?>">
+                <h4><?php echo htmlspecialchars($anuncio['nome'], ENT_QUOTES, 'UTF-8'); ?></h4>
+                <p><?php echo htmlspecialchars($anuncio['descricao'], ENT_QUOTES, 'UTF-8'); ?></p>
+                <a href="paginaOng.php?cnpj=<?php echo htmlspecialchars($anuncio['ong_cnpj'], ENT_QUOTES, 'UTF-8'); ?>" class="card-descricao"><?php echo htmlspecialchars($anuncio['ong_nome'], ENT_QUOTES, 'UTF-8'); ?></a>
+                <button onclick="location.href='paginaAnuncio.php?id_anuncio=<?php echo htmlspecialchars($anuncio['id_anuncio'], ENT_QUOTES, 'UTF-8'); ?>'">Detalhes...</button>
             </div>
         <?php endwhile; ?>
     </section>
 
 </main>
-<footer>
-    <div class="rodape">
-        <div class="informacoes">
-            <p>Desenvolvido por Tiago, 2024</p>
+<footer class="rodape">
+    <div class="rodape-container">
+        <div class="rodape-coluna">
+            <h4>Sobre Nós</h4>
+            <p>Nós somos um grupo dedicado a transformar vidas através de doações. Acreditamos no poder da solidariedade e da generosidade.</p>
+        </div>
+        <div class="rodape-coluna">
+            <h4>Links Úteis</h4>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="doacao.html">Doação</a></li>
+                <li><a href="profile.php">Perfil</a></li>
+                <li><a href="contato.html">Contato</a></li>
+            </ul>
+        </div>
+        <div class="rodape-coluna">
+            <h4>Contato</h4>
+            <p>Email: contato@doe.com</p>
+            <p>Telefone: (19) 1234-5678</p>
+        </div>
+        <div class="rodape-coluna">
+            <h4>Redes Sociais</h4>
+            <div class="rodape-icones">
+                <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
+                <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
+                <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
+                <a href="#"><ion-icon name="logo-linkedin"></ion-icon></a>
+            </div>
         </div>
     </div>
 </footer>
@@ -215,10 +238,29 @@ $result = pg_query($conexao, $query);
 <script>
     $(document).ready(function(){
         $('.carrossel').slick({
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 2000,
+            dots: true,
+            infinite: true,
+            speed: 300,
+            slidesToShow: 1,
+            adaptiveHeight: true
+        });
+
+        // Verifica o status de login
+        $.ajax({
+            url: 'check_login.php',
+            type: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                var loginButtonContainer = $('#login-button-container');
+                if (response.logged_in) {
+                    loginButtonContainer.html('<div class="botao-login-anuncio"> <a href="logout.php"><button class="cabecalho-menu-login">Sair</button></a> <a href="criarAnuncio.html"><button class="cabecalho-menu-anuncio"><i class="fas fa-plus"></i></button></a> </div>');
+                } else {
+                    loginButtonContainer.html('<a href="login.html"><button class="cabecalho-menu-login">Login</button></a>');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Erro ao verificar o status de login:', error);
+            }
         });
     });
 </script>

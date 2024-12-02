@@ -252,7 +252,7 @@ $outros_anuncios = $stmt->get_result();
                 <?php while ($outro_anuncio = $outros_anuncios->fetch_assoc()): ?>
                     <img class="anuncio-miniatura" src="<?php echo $outro_anuncio['imagem']; ?>" alt="Imagem do Item">
                     <h3 class="anuncio-titulo-pequeno"><?php echo $outro_anuncio['nome_anuncio']; ?></h3>
-                    <p><a href="anuncio.php?id_anuncio=<?php echo $outro_anuncio['id_anuncio']; ?>" class="anuncio-botao-pequeno">Detalhes</a></p>
+                    <button class="anuncio-botao-pequeno" onclick="location.href='paginaAnuncio.php?id_anuncio=<?php echo $outro_anuncio['id_anuncio']; ?>'">Detalhes...</button>
                 <?php endwhile; ?>
             </div>
         </section>
